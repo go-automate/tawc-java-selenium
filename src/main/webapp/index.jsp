@@ -84,6 +84,8 @@ span.psw {
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
+    <p></p>
+    <p id="rejectLogin"></p>
   </div>
 </body>
 </html>

@@ -34,6 +34,8 @@
         </nav>
 
     <div class="container">
+        <p></p>
+        <p><b>Login Successful</b></p>
         <div class="jumbotron">
             <h1>Welcome Tester!</h1>
             <p>Here's a list of our favourite automation tools, why not try adding, deleting and searching the list using your automation skills? </p>

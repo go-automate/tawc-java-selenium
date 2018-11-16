@@ -4,6 +4,9 @@ function validate() {
     if (name == "tester" && pwd == "letmein" || name == "tester1" && pwd == "letmein" || name == "tester2" && pwd == "letmein"  ) {
         window.location = "/tools";
     } else {
-    alert("Username or Password is Incorrect");
+    incorrectPassword();
     }
+}
+function incorrectPassword() {
+    document.getElementById('rejectLogin').innerHTML = '<b>WARNING: Username or Password is incorrect</b>';
 }
