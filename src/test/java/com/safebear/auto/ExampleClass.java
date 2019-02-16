@@ -5,7 +5,7 @@ package com.safebear.auto;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-// This is a Class, which contains variables and methods.
+// This is a Class, which contains variables and methods
 public class ExampleClass {
 
     // This is a variable - and integer, which can only contain whole numbers. We've called it 'exampleVariable'
