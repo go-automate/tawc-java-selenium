@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
-public class BaseTest {
+public abstract class BaseTest{
+
     WebDriver driver;
 
     @BeforeTest
@@ -23,6 +24,8 @@ public class BaseTest {
         }
 
         driver.quit();
+
+
 
     }
 
