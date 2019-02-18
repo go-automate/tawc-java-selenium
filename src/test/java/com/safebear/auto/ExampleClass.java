@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class ExampleClass {
 
     // This is a variable - and integer, which can only contain whole numbers. We've called it 'exampleVariable'
-    int exampleVariable = 5;
+    int exampleVariable = 6;
 
     // This is a test that checks to see if exampleVariable is '5'
     @Test
@@ -19,7 +19,7 @@ public class ExampleClass {
         Assertions.assertThat(exampleVariable).isEqualTo(5);
 
         // We can print something to screen
-        System.out.println("This is our first commit");
+        System.out.println("This is our second commit");
 
     }
 
