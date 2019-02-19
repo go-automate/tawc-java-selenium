@@ -13,7 +13,7 @@ public class Utils {
     }
 
     public static WebDriver getDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/resources/drivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/driver/chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1366,768");
