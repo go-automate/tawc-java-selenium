@@ -3,8 +3,10 @@ package com.safebear.auto.tests;
 import com.safebear.auto.utils.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class LoginTest extends BaseTest {
+    private SoftAssert softly = new SoftAssert();
 
     @Test
     public void loginTest() {
@@ -20,6 +22,8 @@ public class LoginTest extends BaseTest {
         loginPage.clicklogButton();
 
         Assert.assertEquals(toolsPage.getPageTitle(),"Tools Page" , "The Login Page ddn't open, or the title text has changed");
+
+
     }
 
 }

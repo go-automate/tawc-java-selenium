@@ -22,6 +22,9 @@ public class Utils {
             case "chrome":
                 return new ChromeDriver(options);
 
+    case "headless":
+    options.addArguments("headless", "disable-gpu");
+    return new ChromeDriver(options);
             default:
                 return new ChromeDriver(options);
         }
