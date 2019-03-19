@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Utils {
 
     // Get our URL and Browsername from the CI or use the default
@@ -22,8 +25,8 @@ public abstract class Utils {
 
     protected static void initializeBrowser() {
 
-        System.setProperty("webdriver.chrome.drivers", "src/test/resources/drivers/chromedriver.exe");
-        System.setProperty("webdriver.firefox.drivers", "src/test/resources/drivers/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+        System.setProperty("webdriver.firefox.driver", "src/test/resources/drivers/geckodriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1366,768");
@@ -64,7 +67,13 @@ public abstract class Utils {
         }catch (TimeoutException e){
 
             e.printStackTrace();
-            Assert.fail("The element couldn't be found!");
+            Assert.fail("Timeout: The element couldn't be found in 5 seconds!");
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+            Assert.fail("Something went wrong!");
+
         }
 
         return element;
@@ -91,7 +100,41 @@ public abstract class Utils {
 
     }
 
+    //
+    protected static List<WebElement> waitForElements (By locator) {
+        //create a counter and assign it a 0 value
+        int i = 0;
+        //create a list of type webelement and call it elements and give it a value of null or empty
+        List<WebElement> elements = new ArrayList<>();
 
+        //loop -> while the list created above is empty and is smaller than 6 do the following below:
+        while (elements.isEmpty() && i < 6 ){
+            //to the list called 'elements' call the webdriver.findelement with the locator holder
+            elements = browser.findElements(locator);
+            //increment counter by 1
+            i++;
+            //if the list is empty
+            if (elements.isEmpty()){
+            //sleep for 1 second
+                try {
+                    Thread.sleep(1000);
+                    //catch an error not quite sure what the catch is looking for here
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
+            //otherwise return the list
+            } else {
+
+                return elements;
+            }
+
+        }
+
+        Assert.fail("Timeout: Couldn't find the Elements on the page");
+
+        return elements;
+
+    }
 
 }

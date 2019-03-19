@@ -6,4 +6,10 @@ import com.safebear.auto.utils.Utils;
 public class ViewProductPage extends Utils {
 
     ViewProductPageLocators locators = new ViewProductPageLocators();
+
+    public void clickOnDeleteButton(){
+        waitForElement(locators.getDeleteButtonLocator()).click();
+    }
+
+
 }
