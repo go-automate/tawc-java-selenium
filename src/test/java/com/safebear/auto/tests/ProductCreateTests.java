@@ -1,6 +1,7 @@
 package com.safebear.auto.tests;
 
 import com.safebear.auto.pages.locators.ViewProductPageLocators;
+import com.safebear.auto.utils.StaticProvider;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -17,12 +18,7 @@ public class ProductCreateTests extends BaseTest {
 
     }
 
-
-    @BeforeMethod(dependsOnMethods = "setUpTest")
-    public void setUpEnvironment() {
-
-
-        String name = "chicken";
+    public void setUpEnvironment(String name) {
 
         // CPSU01
         // SETUP: Check whether the `Product` is present in the list, if it's there, delete it.
@@ -35,27 +31,27 @@ public class ProductCreateTests extends BaseTest {
 
     }
 
-    @AfterMethod
-    public void clearUpEnvironment(){
+    public void clearUpEnvironment(String name){
 
         // CPTD01
         // TEARDOWN: Delete the `Product` that was created.
-        deleteProduct("chicken");
+        deleteProduct(name);
         // ASSERT: `Product` is no longer listed.
-        Assert.assertFalse(homePage.isProductInList("chicken"));
+        Assert.assertFalse(homePage.isProductInList(name));
 
 
     }
 
 
-    @Test
-    public void createProductTest(){
+    @Test(dataProvider = "testProducts", dataProviderClass = StaticProvider.class)
+    public void createProductTest(String name, String description, String price){
 
 
         // CP01
         // Navigate to the `Products Page`
         // This happens in the 'BeforeMethod' in BaseTest.
 
+        setUpEnvironment(name);
 
         // ASSERT: We're on the `Products Page` of the Website
         Assert.assertEquals(homePage.getPageUrl(), "products");
@@ -72,9 +68,9 @@ public class ProductCreateTests extends BaseTest {
          // CP03
          // Enter a `Name`, `Description` and `Price` for a Product (see `test-data.adoc` for Test Data)
          // `Product` details entered
-        addProductPage.enterProductName("chicken");
-        addProductPage.enterProductDescription("bird");
-        addProductPage.enterProductPrice("3.50");
+        addProductPage.enterProductName(name);
+        addProductPage.enterProductDescription(description);
+        addProductPage.enterProductPrice(price);
 
          // CP04
          // Press the `Save` button.
@@ -88,9 +84,9 @@ public class ProductCreateTests extends BaseTest {
          // ASSERT: The product details are correct (`name`, `description`, `price`).
 
        // System.out.print(viewProductPage.getProductName());
-        Assert.assertEquals(viewProductPage.getProductName(), "chicken");
-        Assert.assertEquals(viewProductPage.getProductDescription(), "bird");
-        Assert.assertEquals(viewProductPage.getProductPrice(), "3.5");
+        Assert.assertEquals(viewProductPage.getProductName(), name);
+        Assert.assertEquals(viewProductPage.getProductDescription(), description);
+        Assert.assertEquals(viewProductPage.getProductPrice(), price);
 
          // CP05
          // Press the `Products Page` button.
@@ -101,13 +97,10 @@ public class ProductCreateTests extends BaseTest {
         Assert.assertEquals(homePage.getPageUrl(), "products");
 
          // ASSERT: The new `Product` is listed.
-        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), "chicken");
+        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), name);
 
-
+        clearUpEnvironment(name);
 
     }
-
-
-
 
 }
