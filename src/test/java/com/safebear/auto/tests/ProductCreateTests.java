@@ -26,7 +26,7 @@ public class ProductCreateTests extends BaseTest {
 
         // CPSU01
         // SETUP: Check whether the `Product` is present in the list, if it's there, delete it.
-        if(homePage.isProductInList(name)){
+        while(homePage.isProductInList(name)){
             deleteProduct(name);
         }
 

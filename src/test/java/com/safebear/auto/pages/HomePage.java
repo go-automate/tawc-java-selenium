@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
 
     public List<String> getNamesOfProductsInTheList(){
 
-        List<WebElement> elements = waitForElements(locators.getProductNamesInTable());
+        List<WebElement> elements = waitForElementsNoFail(locators.getProductNamesInTable());
 
         List<String> names = new ArrayList<>();
 
@@ -37,14 +37,25 @@ public class HomePage extends BasePage {
 
     }
 
+
+
     public void clickOnProductName(String name){
 
-        waitForElements(locators.getProductNamesInTable()).forEach((element)->{
-            if (element.getText().equals(name)){
-                element.click();
 
+        Iterator<WebElement> listOfProductElements = waitForElements(locators.getProductNamesInTable()).iterator();
+
+        List<WebElement> products = waitForElements(locators.getProductNamesInTable());
+
+        while (listOfProductElements.hasNext()) {
+
+            WebElement product = listOfProductElements.next();
+
+            if (product.getText().equals(name)){
+                product.click();
+                break;
             }
-        });
+
+        }
 
     }
 
