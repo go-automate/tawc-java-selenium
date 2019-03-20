@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
-public class HomePage extends Utils {
+public class HomePage extends BasePage {
 
     HomePageLocators locators = new HomePageLocators();
 
