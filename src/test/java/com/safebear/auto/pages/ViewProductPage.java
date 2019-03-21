@@ -15,6 +15,8 @@ public class ViewProductPage extends BasePage {
         waitForElement(locators.getHomePageButtonLocator()).click();
     }
 
+    public void clickOnEditButton() { waitForElement(locators.getEditButtonLocator()).click(); }
+
     public String getProductName(){
 
        return  waitForElement(locators.getProductNameLocator()).getText();

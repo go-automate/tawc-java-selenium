@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
+/**
+ * Every action or check we can perform on the HomePage of our app
+ */
 public class HomePage extends BasePage {
 
     HomePageLocators locators = new HomePageLocators();
@@ -21,6 +24,10 @@ public class HomePage extends BasePage {
         return waitForElement(locators.getNameOfLastProductInTable()).getText();
     }
 
+    /**
+     * NOTE: If there are no products in the table, this method will not fail, it will simply return an empty list.
+     * @return List of Strings (names of the products in the table)
+     */
     public List<String> getNamesOfProductsInTheList(){
 
         List<WebElement> elements = waitForElementsNoFail(locators.getProductNamesInTable());
@@ -38,7 +45,10 @@ public class HomePage extends BasePage {
     }
 
 
-
+    /**
+     * This method allows you to click on the Product Name in the table on the home page.
+     * @param name This is the name of the product
+     */
     public void clickOnProductName(String name){
 
 
