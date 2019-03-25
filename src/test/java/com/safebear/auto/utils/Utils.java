@@ -116,7 +116,7 @@ public abstract class Utils {
             if (elements.isEmpty()){
             //sleep for 1 second
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     //catch an error not quite sure what the catch is looking for here
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.safebear.auto.tests;
 
 import com.safebear.auto.utils.EditStaticProvider;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,29 +18,24 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
     private void deleteProductsInTable(){
 
-//        if (!homePage.getNamesOfProductsInTheList().isEmpty()){
-//            homePage.getNamesOfProductsInTheList().removeAll(homePage.getNamesOfProductsInTheList());
-//        };
-//        viewProductPage.clickOnDeleteButton();
 
-        Iterator<String> iterator = homePage.getNamesOfProductsInTheList().iterator();
+        while(!homePage.getNamesOfProductsInTheList().isEmpty()){
 
-        while (iterator.hasNext()) {
-
-            if (iterator.next()) {
-                ;
-            }
+            homePage.clickOnFirstProductInTable();
+            viewProductPage.clickOnDeleteButton();
+            //viewProductPage.clickOnHomeButton();
+            Assert.assertEquals(homePage.getPageUrl(), "products");
         }
+
     }
 
 
     public void setUpEnviroment(String name, String description, String price){
 
-        while(!homePage.isProductInList(name)){
 
+            deleteProductsInTable();
             createProduct(name, description, price);
 
-        }
 
     }
 
@@ -141,8 +137,32 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // ASSERT: `Product` is no longer listed.
         Assert.assertFalse(homePage.isProductInList(editName));
 
+    }
 
+    @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts")
+    public void viewProductTest(String name, String description, String price){
 
+        //VPSU01
+        // SETUP: Check whether the `Product` is present in the list, if it's not, create it.
+        setUpEnviroment(name, description, price);
+        // ASSERT: `Product` in list.
+        Assert.assertEquals(homePage.getNamesOfProductsInTheList(), name);
+
+        // VP01
+        // Navigate to the `Products Page`
+        // ASSERT: We're on the `Products Page` of the Website
+
+        // VERIFY: The `name` and `description` are correct.
+
+        // VP02
+        // Click on the `Product` name
+        // ASSERT: We're on the `View Product` page
+
+        // VERIFY: The `name`, `description` and `price` of the product are correct.
+
+        // VPTD01
+        // TEARDOWN: Delete the `Product` that was created.
+        // ASSERT: `Product` is no longer listed.
 
     }
 

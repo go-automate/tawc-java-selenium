@@ -45,16 +45,21 @@ public class HomePage extends BasePage {
     }
 
 
+    public void clickOnFirstProductInTable(){
+
+
+        waitForElements(locators.getProductNamesInTable()).get(0).click();
+
+    }
+
+
     /**
      * This method allows you to click on the Product Name in the table on the home page.
      * @param name This is the name of the product
      */
     public void clickOnProductName(String name){
 
-
         Iterator<WebElement> listOfProductElements = waitForElements(locators.getProductNamesInTable()).iterator();
-
-        List<WebElement> products = waitForElements(locators.getProductNamesInTable());
 
         while (listOfProductElements.hasNext()) {
 
@@ -83,6 +88,23 @@ public class HomePage extends BasePage {
         return false;
 
     }
+
+//    public void deleteAllProducts(){
+//
+//        Iterator<WebElement> listOfProductElements = waitForElements(locators.getProductNamesInTable()).iterator();
+//
+//        while (listOfProductElements.hasNext()) {
+//
+//            WebElement product = listOfProductElements.next();
+//
+//            if (product.getText().){
+//                product.click();
+//                product.
+//                break;
+//            }
+//
+//        }
+//    }
 
 }
 
