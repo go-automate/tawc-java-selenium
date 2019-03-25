@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 public class ProductCreateTests extends BaseTest {
 
 
+
+
     private void deleteProduct(String name){
 
         homePage.clickOnProductName(name);

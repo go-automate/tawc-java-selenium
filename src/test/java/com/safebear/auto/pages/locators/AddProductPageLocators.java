@@ -9,11 +9,12 @@ public class AddProductPageLocators {
 
     By homePageButtonLocator = By.cssSelector("a.mat-flat-button.mat-primary");
 
-    By nameFieldLocator = By.cssSelector("#mat-input-0");
-    By descripionFieldLocator = By.cssSelector("#mat-input-1");
-    By priceFieldLocator = By.cssSelector("#mat-input-2");
+    By nameFieldLocator = By.cssSelector("[formcontrolname='prod_name']");
+    By descripionFieldLocator = By.cssSelector("[formcontrolname='prod_desc']");
+    By priceFieldLocator = By.cssSelector("[formcontrolname='prod_price']");
 
-    By submitButtonLocator = By.cssSelector("button.mat-flat-button.mat-primary");
+    // By submitButtonLocator = By.cssSelector("button.mat-flat-button.mat-primary");
+    By submitButtonLocator = By.cssSelector("[type='submit']");
 
 
 

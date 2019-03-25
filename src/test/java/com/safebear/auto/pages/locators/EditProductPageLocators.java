@@ -8,10 +8,10 @@ public class EditProductPageLocators {
 
     By viewProductPageButtonLocator = By.cssSelector("a.mat-flat-button.mat-primary");
 
-    By nameFieldLocator = By.cssSelector("#mat-input-6");
-    By descripionFieldLocator = By.cssSelector("#mat-input-7");
-    By priceFieldLocator = By.cssSelector("#mat-input-8");
+    By nameFieldLocator = By.cssSelector("[formcontrolname='prod_name']");
+    By descripionFieldLocator = By.cssSelector("[formcontrolname='prod_desc']");
+    By priceFieldLocator = By.cssSelector("[formcontrolname='prod_price']");
 
-    By submitButtonLocator = By.cssSelector("button.mat-flat-button.mat-primary");
+    By submitButtonLocator = By.cssSelector("[type='submit']");
 
 }

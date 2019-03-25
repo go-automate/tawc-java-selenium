@@ -11,6 +11,7 @@ public class HomePageLocators {
 
     // Last product details
     private By nameOfLastProductInTable = By.cssSelector("tbody tr:last-child td:first-child");
+    private By nameOfFirstProductInTable = By.cssSelector("tbody tr:first-child td:first-child");
     private By priceOfLastProductInTable = By.cssSelector("tbody tr:last-child td:last-child");
 
 }
