@@ -148,6 +148,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // ASSERT: `Product` in list.
         Assert.assertEquals(homePage.getNamesOfProductsInTheList(), name);
 
+
         // VP01
         // Navigate to the `Products Page`
         // ASSERT: We're on the `Products Page` of the Website
