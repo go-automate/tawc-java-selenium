@@ -63,11 +63,6 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         Assert.assertFalse(homePage.isProductInList(name));
     }
 
-
-
-
-
-
     @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts")
     public void editProductTest(String name, String description, String price, String editName, String editDescription, String editPrice){
 
@@ -140,31 +135,70 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
     }
 
     @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts")
-    public void viewProductTest(String name, String description, String price){
+    public void viewProductTest(String name, String description, String price, String editName, String editDescription, String editPrice){
 
         //VPSU01
         // SETUP: Check whether the `Product` is present in the list, if it's not, create it.
         setUpEnviroment(name, description, price);
         // ASSERT: `Product` in list.
-        Assert.assertEquals(homePage.getNamesOfProductsInTheList(), name);
+        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), name);
 
 
         // VP01
         // Navigate to the `Products Page`
         // ASSERT: We're on the `Products Page` of the Website
-
+        Assert.assertEquals(homePage.getPageUrl(), "products");
         // VERIFY: The `name` and `description` are correct.
+        Assert.assertEquals(homePage.getNamesOfProductsInTheList().get(0), name);
+        //description can be viewed on the product page
 
         // VP02
         // Click on the `Product` name
+        homePage.clickOnProductName(name);
         // ASSERT: We're on the `View Product` page
+        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
 
         // VERIFY: The `name`, `description` and `price` of the product are correct.
+        Assert.assertEquals(viewProductPage.getProductName(), name);
+        Assert.assertEquals(viewProductPage.getProductDescription(), description);
+        Assert.assertEquals(viewProductPage.getProductPrice(), price);
 
         // VPTD01
         // TEARDOWN: Delete the `Product` that was created.
+        viewProductPage.clickOnDeleteButton();
         // ASSERT: `Product` is no longer listed.
+        Assert.assertFalse(homePage.isProductInList(name));
 
     }
 
+    @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts" )
+    public void deleteProductTest(String name, String description, String price, String editName, String editDescription, String editPrice){
+
+        // DPSU01
+        // SETUP: Check whether the `Product` is listed, if it's not, create it.
+        setUpEnviroment(name, description, price);
+        // ASSERT: `Product` in list.
+        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), name);
+
+        // DP01
+        // Navigate to the `Products Page`
+        // ASSERT: We're on the `Products Page` of the Website
+        Assert.assertEquals(homePage.getPageUrl(), "products");
+
+        // DP02
+        // Click on the `Product` name
+        homePage.clickOnProductName(name);
+        // ASSERT: We're on the `View Product` page
+        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+
+        // DP03
+        // Click on the `Delete Product` button
+        viewProductPage.clickOnDeleteButton();
+        // ASSERT: We're returned to the `Products Page`
+        Assert.assertEquals(homePage.getPageUrl(), "products");
+
+        // ASSERT: The `Product` is no longer listed.
+        Assert.assertFalse(homePage.isProductInList(name));
+
+    }
 }

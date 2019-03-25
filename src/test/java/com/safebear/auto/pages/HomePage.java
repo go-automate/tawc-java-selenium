@@ -74,6 +74,11 @@ public class HomePage extends BasePage {
 
     }
 
+    /**
+     * This method iterates through the list and if the parameter string matches any of the Strings in the 'iterator'-list it will return a
+     * @param name
+     * @return
+     */
     public boolean isProductInList(String name) {
 
         Iterator<String> iterator = this.getNamesOfProductsInTheList().iterator();
