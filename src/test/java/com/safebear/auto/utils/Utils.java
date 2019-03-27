@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class Utils {
 
     // Get our URL and Browsername from the CI or use the default
-    protected static final String URL = System.getProperty("url", "localhost:8888");
+    protected static final String URL = System.getProperty("url", "http://automate.safebear.co.uk:8080");
     private static final String BROWSERNAME = System.getProperty("browser", "chrome");
 
     // This will be used to store an instance of our driver (e.g. ChromeDriver, GeckoDriver etc)
@@ -116,7 +116,7 @@ public abstract class Utils {
             if (elements.isEmpty()){
             //sleep for 1 second
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(50);
                     //catch an error not quite sure what the catch is looking for here
                 } catch (InterruptedException e) {
                     e.printStackTrace();
