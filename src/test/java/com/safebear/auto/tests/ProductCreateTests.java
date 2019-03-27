@@ -1,7 +1,9 @@
 package com.safebear.auto.tests;
 
 import com.safebear.auto.pages.locators.ViewProductPageLocators;
+import com.safebear.auto.utils.EditStaticProvider;
 import com.safebear.auto.utils.StaticProvider;
+import com.safebear.auto.utils.TestData;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -11,49 +13,15 @@ import org.testng.annotations.Test;
 public class ProductCreateTests extends BaseTest {
 
 
-
-
-    private void deleteProduct(String name){
-
-        homePage.clickOnProductName(name);
-        viewProductPage.clickOnDeleteButton();
-
-    }
-
-    public void setUpEnvironment(String name) {
-
-        // CPSU01
-        // SETUP: Check whether the `Product` is present in the list, if it's there, delete it.
-        while(homePage.isProductInList(name)){
-            deleteProduct(name);
-        }
-
-        // ASSERT: Product is not in list
-        Assert.assertFalse(homePage.isProductInList(name));
-
-    }
-
-    public void clearUpEnvironment(String name){
-
-        // CPTD01
-        // TEARDOWN: Delete the `Product` that was created.
-        deleteProduct(name);
-        // ASSERT: `Product` is no longer listed.
-        Assert.assertFalse(homePage.isProductInList(name));
-
-
-    }
-
-
-    @Test(dataProvider = "testProducts", dataProviderClass = StaticProvider.class)
-    public void createProductTest(String name, String description, String price){
+    @Test(dataProvider = "testEditProducts", dataProviderClass = EditStaticProvider.class)
+    public void createProductTest(TestData product){
 
 
         // CP01
         // Navigate to the `Products Page`
         // This happens in the 'BeforeMethod' in BaseTest.
 
-        setUpEnvironment(name);
+        cSetUpEnvironment(product);
 
         // ASSERT: We're on the `Products Page` of the Website
         Assert.assertEquals(homePage.getPageUrl(), "products");
@@ -70,9 +38,9 @@ public class ProductCreateTests extends BaseTest {
          // CP03
          // Enter a `Name`, `Description` and `Price` for a Product (see `test-data.adoc` for Test Data)
          // `Product` details entered
-        addProductPage.enterProductName(name);
-        addProductPage.enterProductDescription(description);
-        addProductPage.enterProductPrice(price);
+        addProductPage.enterProductName(product.getName());
+        addProductPage.enterProductDescription(product.getDescription());
+        addProductPage.enterProductPrice(product.getPrice());
 
          // CP04
          // Press the `Save` button.
@@ -86,9 +54,9 @@ public class ProductCreateTests extends BaseTest {
          // ASSERT: The product details are correct (`name`, `description`, `price`).
 
        // System.out.print(viewProductPage.getProductName());
-        Assert.assertEquals(viewProductPage.getProductName(), name);
-        Assert.assertEquals(viewProductPage.getProductDescription(), description);
-        Assert.assertEquals(viewProductPage.getProductPrice(), price);
+        Assert.assertEquals(viewProductPage.getProductName(), product.getName());
+        Assert.assertEquals(viewProductPage.getProductDescription(), product.getDescription());
+        Assert.assertEquals(viewProductPage.getProductPrice(), product.getPrice());
 
          // CP05
          // Press the `Products Page` button.
@@ -99,9 +67,9 @@ public class ProductCreateTests extends BaseTest {
         Assert.assertEquals(homePage.getPageUrl(), "products");
 
          // ASSERT: The new `Product` is listed.
-        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), name);
+        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());
 
-        clearUpEnvironment(name);
+        clearUpEnvironment(product);
 
     }
 
