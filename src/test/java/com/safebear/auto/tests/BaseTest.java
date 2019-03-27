@@ -38,7 +38,7 @@ public abstract class BaseTest extends Utils {
         // CPSU01
         // SETUP: Check whether the `Product` is present in the list, if it's there, delete it.
         while(homePage.isProductInList(product.getName())){
-            deleteProduct(product);
+            deleteProduct(product.getName());
         }
 
         // ASSERT: Product is not in list
@@ -48,45 +48,48 @@ public abstract class BaseTest extends Utils {
 
     protected void rudSetUpEnviroment(TestData product){
 
-        String name = "";
-        String editName = "";
 
-
+        /**********************************************************************
+         This checks to see if a product from our test dataset has been created. If it has, it deletes it
+         We have two types of products in the list, one that is created at the start of the test and one that has its name edited.
+         So we check for both.
+         **************************************************************************/
         while(homePage.isProductInList(product.getName()) || homePage.isProductInList(product.getEditName())){
             if(homePage.isProductInList(product.getName())){
-                name = product.getName();
-            }if(homePage.isProductInList(product.getEditName())){
-                editName = product.getEditName();
-            }else{
-
+                deleteProduct(product.getName());
+            }else {
+                deleteProduct(product.getEditName());
             }
-
-
-
-            deleteProduct(name, editName);
         }
         createProduct(product);
 
 
     }
 
-    protected void deleteProduct(String name, String editName){
+    protected void deleteProduct(String name){
 
         homePage.clickOnProductName(name);
-        viewProductPage.clickOnDeleteButton();
-        homePage.clickOnProductName(editName);
         viewProductPage.clickOnDeleteButton();
 
 
     }
 
-    protected void clearUpEnvironment(String name,  product) {
+    protected void clearUpEnvironment(TestData product) {
 
         // CPTD01
         // TEARDOWN: Delete the `Product` that was created.
-        deleteProduct(name,editName);
+        //deleteProduct(product.getName());
         // ASSERT: `Product` is no longer listed.
-        Assert.assertFalse(homePage.isProductInList(product.getName()));
+        //Assert.assertFalse(homePage.isProductInList(product.getName()));
+        while(homePage.isProductInList(product.getName()) || homePage.isProductInList(product.getEditName())){
+            if(homePage.isProductInList(product.getName())){
+                deleteProduct(product.getName());
+                Assert.assertFalse(homePage.isProductInList(product.getName()));
+            }else {
+                deleteProduct(product.getEditName());
+                Assert.assertFalse(homePage.isProductInList(product.getEditName()));
+            }
+        }
 
     }
 

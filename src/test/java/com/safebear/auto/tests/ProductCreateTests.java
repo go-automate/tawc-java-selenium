@@ -1,19 +1,15 @@
 package com.safebear.auto.tests;
 
-import com.safebear.auto.pages.locators.ViewProductPageLocators;
-import com.safebear.auto.utils.EditStaticProvider;
+
 import com.safebear.auto.utils.StaticProvider;
 import com.safebear.auto.utils.TestData;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProductCreateTests extends BaseTest {
 
 
-    @Test(dataProvider = "testEditProducts", dataProviderClass = EditStaticProvider.class)
+    @Test(dataProvider = "testProducts", dataProviderClass = StaticProvider.class)
     public void createProductTest(TestData product){
 
 

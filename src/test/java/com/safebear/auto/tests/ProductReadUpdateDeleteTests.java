@@ -1,6 +1,6 @@
 package com.safebear.auto.tests;
 
-import com.safebear.auto.utils.EditStaticProvider;
+import com.safebear.auto.utils.StaticProvider;
 import com.safebear.auto.utils.TestData;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -27,7 +27,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
 
 
-    @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts")
+    @Test(dataProviderClass = StaticProvider.class, dataProvider = "testProducts")
     public void editProductTest(TestData product){
 
 
@@ -68,7 +68,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
         // EP05
         // Enter new details from the `test-data-edit-product.json` file
-        // New details are entered for now we add the details from the EditStaticProvider.java file
+        // New details are entered for now we add the details from the StaticProvider.java file
         editProductPage.enterProductName(product.getEditName());
         editProductPage.enterProductDescription(product.getEditDescription());
         editProductPage.enterProductPrice(product.getEditPrice());
@@ -110,7 +110,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
     }
 
-    @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts")
+    @Test(dataProviderClass = StaticProvider.class, dataProvider = "testProducts")
     public void viewProductTest(TestData product){
 
         //VPSU01
@@ -125,7 +125,19 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // ASSERT: We're on the `Products Page` of the Website
         Assert.assertEquals(homePage.getPageUrl(), "products");
         // VERIFY: The `name` and `description` are correct.
-        Assert.assertEquals(homePage.getNamesOfProductsInTheList().get(0), product.getName());
+        List<String> products = homePage.getNamesOfProductsInTheList();
+
+        boolean productInList = false;
+
+        for( String listProduct : products){
+
+            if (listProduct.equals(product.getName())){
+                productInList = true;
+            }
+
+        }
+
+        Assert.assertTrue(productInList, "Product not in the Table");
         //description can be viewed on the product page
 
         // VP02
@@ -147,7 +159,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
     }
 
-    @Test(dataProviderClass = EditStaticProvider.class, dataProvider = "testEditProducts" )
+    @Test(dataProviderClass = StaticProvider.class, dataProvider = "testProducts" )
     public void deleteProductTest(TestData product){
 
         // DPSU01
