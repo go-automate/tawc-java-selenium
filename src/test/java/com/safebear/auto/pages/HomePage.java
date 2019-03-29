@@ -13,6 +13,9 @@ public class HomePage extends BasePage {
 
     HomePageLocators locators = new HomePageLocators();
 
+    public boolean areWeOnHomePage(){
+        return waitForElement(locators.getPageLocator()).isDisplayed();
+    }
 
     public void clickOnAddProductButton(){
 
@@ -94,22 +97,7 @@ public class HomePage extends BasePage {
 
     }
 
-//    public void deleteAllProducts(){
-//
-//        Iterator<WebElement> listOfProductElements = waitForElements(locators.getProductNamesInTable()).iterator();
-//
-//        while (listOfProductElements.hasNext()) {
-//
-//            WebElement product = listOfProductElements.next();
-//
-//            if (product.getText().){
-//                product.click();
-//                product.
-//                break;
-//            }
-//
-//        }
-//    }
+
 
 }
 

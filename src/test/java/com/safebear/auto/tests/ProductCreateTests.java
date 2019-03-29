@@ -20,7 +20,7 @@ public class ProductCreateTests extends BaseTest {
         cSetUpEnvironment(product);
 
         // ASSERT: We're on the `Products Page` of the Website
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        Assert.assertTrue(homePage.areWeOnHomePage());
 
 
 
@@ -29,7 +29,7 @@ public class ProductCreateTests extends BaseTest {
         homePage.clickOnAddProductButton();
 
          // ASSERT: We're on the `Add Product` page
-        Assert.assertEquals(homePage.getPageUrl(), "product-add");
+        // Assert.assertEquals(addProductPage.getPageName(), addProductPage.getPageIdentifier());
 
          // CP03
          // Enter a `Name`, `Description` and `Price` for a Product (see `test-data.adoc` for Test Data)
@@ -45,7 +45,7 @@ public class ProductCreateTests extends BaseTest {
 
          // ASSERT: The `View` product page opens.
         //homePage.clickOnProductName("chicken");
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+        //Assert.assertEquals(viewProductPage.getPageName(), viewProductPage.getPageIdentifier());
 
          // ASSERT: The product details are correct (`name`, `description`, `price`).
 
@@ -60,7 +60,7 @@ public class ProductCreateTests extends BaseTest {
 
 
          // ASSERT: We're returned to the `Products Page`.
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        // Assert.assertEquals(homePage.getPageName(), homePage.getPageIdentifier());
 
          // ASSERT: The new `Product` is listed.
         Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());

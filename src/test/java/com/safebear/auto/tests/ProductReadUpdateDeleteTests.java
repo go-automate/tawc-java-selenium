@@ -27,6 +27,8 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
 
 
 
+
+
     @Test(dataProviderClass = StaticProvider.class, dataProvider = "testProducts")
     public void editProductTest(TestData product){
 
@@ -42,19 +44,19 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // Navigate to the `Products Page`
         //Already done in setup
         // ASSERT: We're on the `Products Page` of the Website
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+         Assert.assertTrue(homePage.areWeOnHomePage());
 
         // EP02
         // Click on the `Product` name
         homePage.clickOnProductName(product.getName());
         // ASSERT: We're on the `View Product` page
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+         Assert.assertTrue(viewProductPage.areWeOnViewPage());
 
         // EP03
         // Click on the `Edit Product` button
         viewProductPage.clickOnEditButton();
         // ASSERT: We're on the `Edit Product Page`
-        Assert.assertEquals(editProductPage.getPageUrl(), "product-edit");
+        Assert.assertTrue(editProductPage.areWeOnEditProductPage());
 
         // EP04
         // Clear the `name`, `description` and `price` fields.
@@ -78,10 +80,12 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         editProductPage.clickOnSubmitButton();
 
         // ASSERT: We are taken to the `View Product` screen
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+        Assert.assertTrue(viewProductPage.areWeOnViewPage());
 
         // ASSERT: The `name`, `description` and `price` of the product have been updated.
         Assert.assertEquals(viewProductPage.getProductName(), product.getEditName());
+        Assert.assertEquals(viewProductPage.getProductDescription(), product.getEditDescription());
+        Assert.assertEquals(viewProductPage.getProductPrice(), product.getEditPrice());
 
         // EP07
         // Click on the `Products Page` button
@@ -117,13 +121,13 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // SETUP: Check whether the `Product` is present in the list, if it's not, create it.
         rudSetUpEnviroment(product);
         // ASSERT: `Product` in list.
-        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());
+        Assert.assertTrue(homePage.areWeOnHomePage());;
 
 
         // VP01
         // Navigate to the `Products Page`
         // ASSERT: We're on the `Products Page` of the Website
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        Assert.assertTrue(homePage.areWeOnHomePage());
         // VERIFY: The `name` and `description` are correct.
         List<String> products = homePage.getNamesOfProductsInTheList();
 
@@ -144,7 +148,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // Click on the `Product` name
         homePage.clickOnProductName(product.getName());
         // ASSERT: We're on the `View Product` page
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+        Assert.assertTrue(viewProductPage.areWeOnViewPage());
 
         // VERIFY: The `name`, `description` and `price` of the product are correct.
         Assert.assertEquals(viewProductPage.getProductName(), product.getName());
@@ -171,19 +175,19 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // DP01
         // Navigate to the `Products Page`
         // ASSERT: We're on the `Products Page` of the Website
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        Assert.assertTrue(homePage.areWeOnHomePage());
 
         // DP02
         // Click on the `Product` name
         homePage.clickOnProductName(product.getName());
         // ASSERT: We're on the `View Product` page
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+        Assert.assertTrue(viewProductPage.areWeOnViewPage());
 
         // DP03
         // Click on the `Delete Product` button
         viewProductPage.clickOnDeleteButton();
         // ASSERT: We're returned to the `Products Page`
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        Assert.assertTrue(homePage.areWeOnHomePage());
 
         // ASSERT: The `Product` is no longer listed.
         Assert.assertFalse(homePage.isProductInList(product.getName()));

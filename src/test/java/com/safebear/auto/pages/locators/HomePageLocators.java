@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 @Data
 public class HomePageLocators {
 
+    // Locate the app tag that tells us what page we're on
+    private By pageLocator = By.tagName("app-products");
+
     private By addProductButtonLocator = By.cssSelector("a.mat-flat-button.mat-primary");
     private By productNamesInTable = By.cssSelector("td.cdk-column-prod_name");
 

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class TestData {
 
-    private String name;  // simon
+    private String name;
     private String editName;
     private String description;
     private String editDescription;

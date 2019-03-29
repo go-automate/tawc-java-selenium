@@ -8,6 +8,10 @@ public class AddProductPage extends BasePage {
 
     AddProductPageLocators locators = new AddProductPageLocators();
 
+    public boolean areWeOnAddProductPage(){
+        return waitForElement(locators.getPageLocator()).isDisplayed();
+    }
+
     public void enterProductName(String name){
 
         waitForElement(locators.getNameFieldLocator()).sendKeys(name);

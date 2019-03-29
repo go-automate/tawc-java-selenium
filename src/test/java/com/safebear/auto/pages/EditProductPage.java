@@ -7,7 +7,9 @@ public class EditProductPage extends BasePage {
 
     EditProductPageLocators locators = new EditProductPageLocators();
 
-    //public void
+    public boolean areWeOnEditProductPage(){
+        return waitForElement(locators.getPageLocator()).isDisplayed();
+    }
 
     public void clickOnNameFieldAndClearIt() { waitForElement(locators.getNameFieldLocator()).clear();}
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="CRUD Suite" verbose="1" >
+    <test name="ReadUpdateDelete">
+        <classes>
+
+            <class name="com.safebear.auto.tests.ProductReadUpdateDeleteTests"/>
+        </classes>
+    </test>
+    <test name="Create">
+        <classes>
+
+            <class name="com.safebear.auto.tests.ProductCreateTests"/>
+        </classes>
+    </test>
+</suite>
