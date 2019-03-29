@@ -38,6 +38,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // SETUP: Check whether the `Product` is present in the list, if it's not, create it.
         rudSetUpEnviroment(product);
         // ASSERT: `Product` in list.
+        //Assert.assertTrue(homePage.getNamesOfProductsInTheList().contains(product.getName()));
         Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());
 
         // EP01
@@ -170,6 +171,7 @@ public class ProductReadUpdateDeleteTests extends BaseTest {
         // SETUP: Check whether the `Product` is listed, if it's not, create it.
         rudSetUpEnviroment(product);
         // ASSERT: `Product` in list.
+        //Assert.assertTrue(homePage.getNamesOfProductsInTheList().contains(product.getName()));
         Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());
 
         // DP01

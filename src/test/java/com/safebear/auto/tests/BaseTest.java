@@ -69,14 +69,6 @@ public abstract class BaseTest extends Utils {
     protected void deleteProduct(String name){
 
         homePage.clickOnProductName(name);
-        if (true){
-            //sleep for 1 second
-            try {
-                Thread.sleep(3000);
-                //catch an error not quite sure what the catch is looking for here
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }}
         viewProductPage.clickOnDeleteButton();
 
 

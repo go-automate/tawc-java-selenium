@@ -12,7 +12,9 @@ public class ViewProductPage extends BasePage {
     }
 
     public void clickOnDeleteButton(){
+        waitForElement(locators.getDeleteButtonLocator()).isDisplayed();
         waitForElement(locators.getDeleteButtonLocator()).click();
+
     }
 
     public void clickOnHomeButton(){
