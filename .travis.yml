@@ -1,0 +1,13 @@
+dist: xenial
+language: java
+
+before_script:
+  - docker-compose up -d
+  - sleep 3
+  - docker restart angular-api
+
+
+
+script:
+  -mvn clean test -Dbrowser="headless" -Ddataset="speed-data.json"
+  -mvn clean test -Dbrowser="headless" -Ddataset="reliability-data.json"

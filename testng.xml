@@ -1,20 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="StudentSuite">
-    <test name="login">
-        <classes><class name="com.safebear.auto.tests.LoginTest">
+<suite name="CRUD Suite" verbose="1" >
+    <test name="ReadUpdateDelete">
+        <classes>
 
-        </class>
+            <class name="com.safebear.auto.tests.ProductReadUpdateDeleteTests"/>
         </classes>
     </test>
-    <test name="TestNG Attributes">
-        <groups>
-            <run>
-                <exclude name="test" />
-        </run>
-        </groups>
-        <classes><class name="com.safebear.auto.TestNgAttributes"></class>
+    <test name="Create">
+        <classes>
+
+            <class name="com.safebear.auto.tests.ProductCreateTests"/>
         </classes>
     </test>
 </suite>

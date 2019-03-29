@@ -1,62 +1,26 @@
 package com.safebear.auto.tests;
 
-import com.safebear.auto.pages.locators.ViewProductPageLocators;
+
 import com.safebear.auto.utils.StaticProvider;
-import org.openqa.selenium.WebElement;
+import com.safebear.auto.utils.TestData;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProductCreateTests extends BaseTest {
 
 
-
-
-    private void deleteProduct(String name){
-
-        homePage.clickOnProductName(name);
-        viewProductPage.clickOnDeleteButton();
-
-    }
-
-    public void setUpEnvironment(String name) {
-
-        // CPSU01
-        // SETUP: Check whether the `Product` is present in the list, if it's there, delete it.
-        while(homePage.isProductInList(name)){
-            deleteProduct(name);
-        }
-
-        // ASSERT: Product is not in list
-        Assert.assertFalse(homePage.isProductInList(name));
-
-    }
-
-    public void clearUpEnvironment(String name){
-
-        // CPTD01
-        // TEARDOWN: Delete the `Product` that was created.
-        deleteProduct(name);
-        // ASSERT: `Product` is no longer listed.
-        Assert.assertFalse(homePage.isProductInList(name));
-
-
-    }
-
-
     @Test(dataProvider = "testProducts", dataProviderClass = StaticProvider.class)
-    public void createProductTest(String name, String description, String price){
+    public void createProductTest(TestData product){
 
 
         // CP01
         // Navigate to the `Products Page`
         // This happens in the 'BeforeMethod' in BaseTest.
 
-        setUpEnvironment(name);
+        cSetUpEnvironment(product);
 
         // ASSERT: We're on the `Products Page` of the Website
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        Assert.assertTrue(homePage.areWeOnHomePage());
 
 
 
@@ -65,14 +29,14 @@ public class ProductCreateTests extends BaseTest {
         homePage.clickOnAddProductButton();
 
          // ASSERT: We're on the `Add Product` page
-        Assert.assertEquals(homePage.getPageUrl(), "product-add");
+        // Assert.assertEquals(addProductPage.getPageName(), addProductPage.getPageIdentifier());
 
          // CP03
          // Enter a `Name`, `Description` and `Price` for a Product (see `test-data.adoc` for Test Data)
          // `Product` details entered
-        addProductPage.enterProductName(name);
-        addProductPage.enterProductDescription(description);
-        addProductPage.enterProductPrice(price);
+        addProductPage.enterProductName(product.getName());
+        addProductPage.enterProductDescription(product.getDescription());
+        addProductPage.enterProductPrice(product.getPrice());
 
          // CP04
          // Press the `Save` button.
@@ -81,14 +45,14 @@ public class ProductCreateTests extends BaseTest {
 
          // ASSERT: The `View` product page opens.
         //homePage.clickOnProductName("chicken");
-        Assert.assertEquals(viewProductPage.getPageUrl(), "product-details");
+        //Assert.assertEquals(viewProductPage.getPageName(), viewProductPage.getPageIdentifier());
 
          // ASSERT: The product details are correct (`name`, `description`, `price`).
 
        // System.out.print(viewProductPage.getProductName());
-        Assert.assertEquals(viewProductPage.getProductName(), name);
-        Assert.assertEquals(viewProductPage.getProductDescription(), description);
-        Assert.assertEquals(viewProductPage.getProductPrice(), price);
+        Assert.assertEquals(viewProductPage.getProductName(), product.getName());
+        Assert.assertEquals(viewProductPage.getProductDescription(), product.getDescription());
+        Assert.assertEquals(viewProductPage.getProductPrice(), product.getPrice());
 
          // CP05
          // Press the `Products Page` button.
@@ -96,12 +60,12 @@ public class ProductCreateTests extends BaseTest {
 
 
          // ASSERT: We're returned to the `Products Page`.
-        Assert.assertEquals(homePage.getPageUrl(), "products");
+        // Assert.assertEquals(homePage.getPageName(), homePage.getPageIdentifier());
 
          // ASSERT: The new `Product` is listed.
-        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), name);
+        Assert.assertEquals(homePage.getNameOfLastProductInTheList(), product.getName());
 
-        clearUpEnvironment(name);
+        clearUpEnvironment(product);
 
     }
 

@@ -19,6 +19,8 @@ public abstract class Utils {
     // Get our URL and Browsername from the CI or use the default
     protected static final String URL = System.getProperty("url", "localhost:8888");
     private static final String BROWSERNAME = System.getProperty("browser", "chrome");
+    private static final String WAIT = System.getProperty( "waitTime", "10");
+
 
     // This will be used to store an instance of our driver (e.g. ChromeDriver, GeckoDriver etc)
     protected static WebDriver browser;
@@ -59,15 +61,16 @@ public abstract class Utils {
 
         WebElement element = null;
 
+
         try {
 
-            element = (new WebDriverWait(browser, 5))
+            element = (new WebDriverWait(browser, Integer.parseInt(WAIT)))
                     .until(ExpectedConditions.presenceOfElementLocated(locator));
 
         }catch (TimeoutException e){
 
             e.printStackTrace();
-            Assert.fail("Timeout: The element couldn't be found in 5 seconds!");
+            Assert.fail("Timeout: The element couldn't be found in " + WAIT + " seconds!");
 
         }catch (Exception e){
 
@@ -86,7 +89,7 @@ public abstract class Utils {
 
         try {
 
-            element = (new WebDriverWait(browser, 5))
+            element = (new WebDriverWait(browser, Integer.parseInt(WAIT)))
                     .until(ExpectedConditions.elementToBeClickable(locator));
 
         }catch (TimeoutException e){
@@ -107,7 +110,7 @@ public abstract class Utils {
         List<WebElement> elements = new ArrayList<>();
 
         //loop -> while the list created above is empty and is smaller than 6 do the following below:
-        while (elements.isEmpty() && i < 6 ){
+        while (elements.isEmpty() && i < (Integer.parseInt(WAIT) * 1000) ){
             //to the list called 'elements' call the webdriver.findelement with the locator holder
             elements = browser.findElements(locator);
             //increment counter by 1
@@ -116,7 +119,7 @@ public abstract class Utils {
             if (elements.isEmpty()){
             //sleep for 1 second
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1);
                     //catch an error not quite sure what the catch is looking for here
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -152,7 +155,7 @@ public abstract class Utils {
             if (elements.isEmpty()){
                 //sleep for 1 second
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(3000);
                     //catch an error not quite sure what the catch is looking for here
                 } catch (InterruptedException e) {
                     e.printStackTrace();

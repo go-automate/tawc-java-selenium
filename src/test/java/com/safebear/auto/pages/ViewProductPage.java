@@ -7,8 +7,14 @@ public class ViewProductPage extends BasePage {
 
     ViewProductPageLocators locators = new ViewProductPageLocators();
 
+    public boolean areWeOnViewPage(){
+        return waitForElement(locators.getPageLocator()).isDisplayed();
+    }
+
     public void clickOnDeleteButton(){
+        waitForElement(locators.getDeleteButtonLocator()).isDisplayed();
         waitForElement(locators.getDeleteButtonLocator()).click();
+
     }
 
     public void clickOnHomeButton(){

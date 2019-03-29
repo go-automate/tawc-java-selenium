@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 @Data
 public class AddProductPageLocators {
 
+    private By pageLocator = By.tagName("app-product-add");
 
     By homePageButtonLocator = By.cssSelector("a.mat-flat-button.mat-primary");
 
