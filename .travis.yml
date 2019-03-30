@@ -1,7 +1,7 @@
 dist: xenial
 language: java
 
-install: true
+# install: true
 
 before_script:
   - docker-compose up -d
@@ -11,5 +11,5 @@ before_script:
 
 
 script:
-  -mvn clean test -Dbrowser="headless" -Ddataset="speed-data.json"
-  -mvn clean test -Dbrowser="headless" -Ddataset="reliability-data.json"
+  - mvn clean test -Dbrowser="headless" -Ddataset="speed-data.json"
+  - mvn clean test -Dbrowser="headless" -Ddataset="reliability-data.json"
