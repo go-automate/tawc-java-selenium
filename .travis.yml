@@ -1,6 +1,8 @@
 dist: xenial
 language: java
 
+install: true
+
 before_script:
   - docker-compose up -d
   - sleep 3
