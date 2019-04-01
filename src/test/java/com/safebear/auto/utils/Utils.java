@@ -31,7 +31,7 @@ public abstract class Utils {
 
     protected static void initializeBrowser() {
 
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver-74");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver-73");
         System.setProperty("webdriver.firefox.driver", "src/test/resources/drivers/geckodriver");
 
         ChromeOptions options = new ChromeOptions();
@@ -46,7 +46,7 @@ public abstract class Utils {
 
             case "headless":
                 options.addArguments("headless");
-                browser.manage().window().setSize(new Dimension(1280,1696));
+                //browser.manage().window().setSize(new Dimension(1280,1696));
                 browser = new ChromeDriver(options);
                 break;
 
