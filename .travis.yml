@@ -3,7 +3,12 @@ dist: xenial
 
 
 jdk:
-  - oraclejdk9
+  - oraclejdk8
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 
 
 
