@@ -1,5 +1,12 @@
-dist: xenial
 language: java
+dist: xenial
+
+
+jdk:
+  - oraclejdk8
+
+
+
 
 before_script:
   - docker-compose up -d
@@ -9,5 +16,5 @@ before_script:
 
 
 script:
-  -mvn clean test -Dbrowser="headless" -Ddataset="speed-data.json"
-  -mvn clean test -Dbrowser="headless" -Ddataset="reliability-data.json"
+  - mvn clean test -Dbrowser="headless" -Ddataset="speed-data.json"
+  - mvn clean test -Dbrowser="headless" -Ddataset="reliability-data.json"
