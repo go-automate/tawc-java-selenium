@@ -20,7 +20,7 @@ import static org.mortbay.util.IO.copy;
 public abstract class Utils {
 
     // Get our URL and Browsername from the CI or use the default
-    protected static final String URL = System.getProperty("url", "http://localhost:8080");
+    protected static final String URL = System.getProperty("url", "localhost:8080");
     private static final String BROWSERNAME = System.getProperty("browser", "chrome");
     private static final String WAIT = System.getProperty( "waitTime", "10");
 
@@ -68,38 +68,38 @@ public abstract class Utils {
         }
     }
 
-    public static String generateScreenShotFileName(){
-
-        //create filename
-
-        return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()) + ".png";
-    }
-
-    public static void captureScreenShot(WebDriver driver, String fileName){
-
-        fileName = "Element not found - " + fileName;
-
-
-        //Take screenshot
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
-        //Make sure that the 'screenshots' directory exists
-        File file = new File("target/screenshots");
-        if(!file.exists()){
-            if (file.mkdir()){
-                System.out.println("Directory is created!");
-            }else{
-                System.out.println("Failed to create directory!");
-            }
-        }
-
-        //Copy file to filename and location we set before
-        try {
-            copy(srcFile, new File("target/screenshots/" + fileName));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
+//    public static String generateScreenShotFileName(){
+//
+//        //create filename
+//
+//        return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()) + ".png";
+//    }
+//
+//    public static void captureScreenShot(WebDriver driver, String fileName){
+//
+//        fileName = "Element not found - " + fileName;
+//
+//
+//        //Take screenshot
+//        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//
+//        //Make sure that the 'screenshots' directory exists
+//        File file = new File("target/screenshots");
+//        if(!file.exists()){
+//            if (file.mkdir()){
+//                System.out.println("Directory is created!");
+//            }else{
+//                System.out.println("Failed to create directory!");
+//            }
+//        }
+//
+//        //Copy file to filename and location we set before
+//        try {
+//            copy(srcFile, new File("target/screenshots/" + fileName));
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
     protected static WebElement waitForElement(By locator){
 
@@ -114,7 +114,7 @@ public abstract class Utils {
         }catch (TimeoutException e){
 
             e.printStackTrace();
-            captureScreenShot(browser,generateScreenShotFileName());
+            //captureScreenShot(browser,generateScreenShotFileName());
             Assert.fail("Timeout: The element couldn't be found in " + WAIT + " seconds!");
 
         }catch (Exception e){
