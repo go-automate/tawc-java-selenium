@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class Utils {
 
     // Get our URL and Browsername from the CI or use the default
-    protected static final String URL = System.getProperty("url", "localhost:8080");
+    protected static final String URL = System.getProperty("url", "https://localhost:8080");
     private static final String BROWSERNAME = System.getProperty("browser", "chrome");
     private static final String WAIT = System.getProperty( "waitTime", "10");
 
