@@ -27,7 +27,7 @@ public abstract class Utils {
 
     protected static void initializeBrowser() {
 
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver-74");
         System.setProperty("webdriver.firefox.driver", "src/test/resources/drivers/geckodriver");
 
         ChromeOptions options = new ChromeOptions();
