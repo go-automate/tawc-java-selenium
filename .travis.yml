@@ -1,9 +1,21 @@
-dist: xenial
 language: java
+dist: trusty
+
+
+jdk:
+  - oraclejdk8
+
+addons:
+  chrome: stable
+#addons:
+#  apt:
+#    packages:
+#      - oracle-java8-installer
 
 # install: true
 
 before_script:
+  - google-chrome --version
   - docker-compose up -d
   - sleep 3
   - docker restart angular-api

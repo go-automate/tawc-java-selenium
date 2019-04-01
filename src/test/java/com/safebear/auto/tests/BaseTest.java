@@ -8,6 +8,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.io.IOException;
+
 public abstract class BaseTest extends Utils {
 
 
@@ -105,9 +107,12 @@ public abstract class BaseTest extends Utils {
     }
 
     @BeforeMethod
-    public void setUpTest(){
+    public void setUpTest() {
         browser.get(URL);
     }
+
+
+
 
     @AfterTest
     public void tearDown(){

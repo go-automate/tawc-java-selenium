@@ -1,9 +1,6 @@
 package com.safebear.auto.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,8 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static org.mortbay.util.IO.copy;
 
 public abstract class Utils {
 
@@ -25,22 +28,30 @@ public abstract class Utils {
     // This will be used to store an instance of our driver (e.g. ChromeDriver, GeckoDriver etc)
     protected static WebDriver browser;
 
+
     protected static void initializeBrowser() {
 
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver-73");
         System.setProperty("webdriver.firefox.driver", "src/test/resources/drivers/geckodriver");
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("window-size=1366,768");
+
 
         switch (BROWSERNAME) {
 
             case "chrome":
+                options.addArguments("window-size=1366,768");
                 browser = new ChromeDriver(options);
                 break;
 
             case "headless":
                 options.addArguments("headless");
+                //browser.manage().window().setSize(new Dimension(1280,1696));
+                browser = new ChromeDriver(options);
+                break;
+
+            case "headlessChromeTravis":
+                options.addArguments("headless", "whitelisted-ips", "no-sandbox","disable-extensions");
                 browser = new ChromeDriver(options);
                 break;
 
@@ -57,6 +68,39 @@ public abstract class Utils {
         }
     }
 
+//    public static String generateScreenShotFileName(){
+//
+//        //create filename
+//
+//        return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()) + ".png";
+//    }
+//
+//    public static void captureScreenShot(WebDriver driver, String fileName){
+//
+//        fileName = "Element not found - " + fileName;
+//
+//
+//        //Take screenshot
+//        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//
+//        //Make sure that the 'screenshots' directory exists
+//        File file = new File("target/screenshots");
+//        if(!file.exists()){
+//            if (file.mkdir()){
+//                System.out.println("Directory is created!");
+//            }else{
+//                System.out.println("Failed to create directory!");
+//            }
+//        }
+//
+//        //Copy file to filename and location we set before
+//        try {
+//            copy(srcFile, new File("target/screenshots/" + fileName));
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+
     protected static WebElement waitForElement(By locator){
 
         WebElement element = null;
@@ -70,6 +114,7 @@ public abstract class Utils {
         }catch (TimeoutException e){
 
             e.printStackTrace();
+            //captureScreenShot(browser,generateScreenShotFileName());
             Assert.fail("Timeout: The element couldn't be found in " + WAIT + " seconds!");
 
         }catch (Exception e){
