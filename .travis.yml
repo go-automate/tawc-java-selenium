@@ -13,6 +13,7 @@ addons:
 #      - oracle-java8-installer
 
 before_script:
+  - google-chrome --version
   - docker-compose up -d
   - sleep 3
   - docker restart angular-api
