@@ -1,6 +1,7 @@
 package com.safebear.auto.tests;
 
 import com.safebear.auto.pages.*;
+import com.safebear.auto.utils.Browser;
 import com.safebear.auto.utils.TestData;
 import com.safebear.auto.utils.Utils;
 import org.testng.Assert;
@@ -8,7 +9,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
-public abstract class BaseTest extends Utils {
+import java.net.MalformedURLException;
+
+public abstract class BaseTest extends Browser {
 
 
     protected HomePage homePage;
@@ -95,7 +98,7 @@ public abstract class BaseTest extends Utils {
 
 
     @BeforeTest
-    public void  setUp(){
+    public void  setUp() throws MalformedURLException {
         initializeBrowser();
         homePage = new HomePage();
         viewProductPage = new ViewProductPage();

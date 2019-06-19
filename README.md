@@ -9,3 +9,17 @@ justifyin my decisions and what needs to change.
 =====
 
 ## 
+
+Using the framework:
+
+
+Score:
+
+
+
+Complexity (how much bespoke code to write)
+HIGH
+
+Reliability
+
+Etc.
