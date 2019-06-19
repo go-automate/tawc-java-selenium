@@ -3,7 +3,6 @@ package com.safebear.auto.tests;
 import com.safebear.auto.pages.*;
 import com.safebear.auto.utils.Browser;
 import com.safebear.auto.utils.TestData;
-import com.safebear.auto.utils.Utils;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;

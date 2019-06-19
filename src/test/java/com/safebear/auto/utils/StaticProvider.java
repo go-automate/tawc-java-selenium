@@ -10,9 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-public class StaticProvider {
+public class StaticProvider extends Browser{
 
-    private static final String FILENAME = System.getProperty("dataset","speed-data.json" );
+    private static final String FILENAME = System.getProperty("dataset", DATASET );
 
     @DataProvider(name = "testProducts")
     public static Object[][] createData() throws FileNotFoundException {

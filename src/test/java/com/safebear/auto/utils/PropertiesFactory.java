@@ -10,25 +10,19 @@ public class PropertiesFactory {
      /* Variables for default values
      ****************************/
 
-    // Selenium Hub
-    protected static String defaultHubUrl;
-
     // Test Environment
     protected static String defaultUrl;
     protected static String defaultBrowsername;
-    protected static String defaultOs;
+    protected static String defaultDataset;
 
     /****************************
     /* Variables for static values
      ****************************/
 
-    // Selenium Hub
-    protected static String hubUrl;
-
     // Test Environment
     protected static String URL;
     protected static String BROWSERNAME;
-    protected static String OS;
+    protected static String DATASET;
 
 
     // Get our values from the config.properties file in the resources folder
@@ -48,13 +42,11 @@ public class PropertiesFactory {
             //load a properties file from class path, inside static method
             prop.load(input);
 
-            // Build our Selenium Hub URLs
-            defaultHubUrl = prop.getProperty("default.hub.url") + ":" + prop.getProperty("default.hub.port") + "/wd/hub";
 
             // Get our Test Environment Variables
             defaultUrl = prop.getProperty("default.env.url");
             defaultBrowsername = prop.getProperty("default.browser");
-            defaultOs = prop.getProperty("default.os");
+            defaultDataset = prop.getProperty("default.dataset");
 
 
 
@@ -67,9 +59,8 @@ public class PropertiesFactory {
 
         URL = System.getProperty("url", defaultUrl);
         BROWSERNAME = System.getProperty("browser", defaultBrowsername);
-        OS = System.getProperty("os", defaultOs);
+        DATASET = System.getProperty("dataset", defaultDataset);
 
-        hubUrl = System.getProperty("huburl", defaultHubUrl);
 
     }
 

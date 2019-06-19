@@ -43,12 +43,7 @@ public class Browser extends PropertiesFactory {
         // Check System Properties (i.e. has anything changed in Maven)
         checkSystemProperties();
 
-        DesiredCapabilities cap = new DesiredCapabilities();
-        Platform platform = Platform.fromString(OS.toUpperCase());
-
         ChromeOptions chromeOptions;
-        FirefoxProfile firefoxProfile;
-        FirefoxOptions firefoxOptions;
 
 
         switch(BROWSERNAME.toUpperCase()) {
