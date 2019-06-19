@@ -18,21 +18,15 @@ public class Waits extends Browser {
 
     protected static WebElement waitForElement(By locator){
 
-        WebElement element = null;
-
-
         try {
-
-            element = (new WebDriverWait(browser, Integer.parseInt(WAIT)))
-                    .until(ExpectedConditions.presenceOfElementLocated(locator));
-
-        }catch (TimeoutException e){
-
+            new WebDriverWait(browser, 30)
+                    .until(ExpectedConditions
+                    .numberOfElementsToBeMoreThan(locator, 0));
+        } catch (TimeoutException e){
             e.printStackTrace();
             //captureScreenShot(browser,generateScreenShotFileName());
             Assert.fail("Timeout: The element couldn't be found in " + WAIT + " seconds!");
-
-        }catch (Exception e){
+        } catch (Exception e){
 
             screenshots.capturescreenshot("timeout-finding-element-");
             e.printStackTrace();
@@ -40,9 +34,7 @@ public class Waits extends Browser {
 
         }
 
-        return element;
-
-
+        return browser.findElement(locator);
 
     }
 

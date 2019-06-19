@@ -16,6 +16,7 @@ public class StaticProvider extends Browser{
 
     @DataProvider(name = "testProducts")
     public static Object[][] createData() throws FileNotFoundException {
+        System.out.println(FILENAME);
         JsonElement jsonData = new JsonParser().parse(new FileReader("src/test/resources/test-data/" + FILENAME));
         JsonElement dataSet = jsonData.getAsJsonObject().get("dataSet");
         List<TestData> testData = new Gson().fromJson(dataSet, new TypeToken<List<TestData>>() {

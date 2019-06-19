@@ -2,7 +2,6 @@ package com.safebear.auto.pages;
 
 
 import com.safebear.auto.pages.locators.AddProductPageLocators;
-import com.safebear.auto.utils.Utils;
 
 public class AddProductPage extends BasePage {
 
